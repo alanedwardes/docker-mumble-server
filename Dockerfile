@@ -13,4 +13,4 @@ VOLUME ["/data"]
 
 EXPOSE 64738
 
-ENTRYPOINT ["/tmp/start.sh"]
+ENTRYPOINT ["murmurd -ini /data/mumble-server.ini"]
