@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y mumble-server && apt-get install -y lib
 RUN groupadd -r -g 474 mumble && \
     useradd -r -u 474 -g mumble mumble
 
-RUN chown mumble /usr/sbin/murmurd && stat /usr/sbin/murmurd
-
 USER mumble
 
 VOLUME ["/data"]
