@@ -7,7 +7,6 @@ RUN groupadd -r -g 474 mumble && \
 USER mumble
 
 ADD start.sh /tmp/start.sh
-RUN chmod 755 /tmp/start.sh
 
 VOLUME ["/data"]
 
