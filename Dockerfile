@@ -1,12 +1,13 @@
 FROM ubuntu:latest
 
-ARG MUMBLE_RELEASE=1.3.0
-ARG MUMBLE_FILE=murmur-static_x86-${MUMBLE_RELEASE}.tar.bz2
+ARG MUMBLE_VERSION=1.3.0
+ARG MUMBLE_RELEASE=murmur-static_x86-$MUMBLE_VERSION
+ARG MUMBLE_BINARY=$MUMBLE_RELEASE.tar.bz2
+ARG MUMBLE_URL=https://github.com/mumble-voip/mumble/releases/download/$MUMBLE_VERSION/$MUMBLE_BINARY
 
-RUN apt-get update && apt-get install -y curl && apt-get install -y libssl1.0-dev
+RUN apt-get update && apt-get install -y wget && apt-get install -y libssl1.0-dev
 
-RUN curl https://github.com/mumble-voip/mumble/releases/download/$MUMBLE_RELEASE/$MUMBLE_FILE --output murmur.tar.bz2 && \
-    tar xjf murmur.tar.bz2
+RUN wget -O murmur.tar.bz2 $MUMBLE_URL && tar -xvjf murmur.tar.bz2 && mv $MUMBLE_RELEASE murmur
 
 RUN groupadd -r -g 474 mumble && \
     useradd -r -u 474 -g mumble mumble
